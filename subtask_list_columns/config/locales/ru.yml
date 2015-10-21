@@ -1,0 +1,8 @@
+# Russian strings go here for Rails i18n
+ru:
+ subtask_list_columns: "Столбцы в списке подзадач" 
+ 
+ available_columns: "Доступные столбцы"
+ 
+ selected_columns: "Выбранные столбцы"
+

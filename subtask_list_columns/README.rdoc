@@ -1,0 +1,12 @@
+= subtask_list_columns
+
+Plugin allows customize columns in list of subtasks on issue page.
+You can display any default and custom fields. You can also change the order of columns.
+
+Setting
+
+Administrator -> Subtask list columns
+By default for all projects are displayed fields: Subject, Status, Assignee, % Done
+If you move a field from the "Available columns" to the "Selected columns" and save the changes, the field will be displayed for the selected project.
+You can edit the list of default fields: /plugins/subtask_list_columns/app/helpers/constants.rb
+

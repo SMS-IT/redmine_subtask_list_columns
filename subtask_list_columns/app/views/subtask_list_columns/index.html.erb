@@ -1,0 +1,168 @@
+<form id="subtask_list_columns">
+
+<fieldset class="box">
+  <legend><%= l(:subtask_list_columns) %></legend>
+  <table class="query-columns">
+    <tbody>
+      <tr>
+        <td id='project_list'>
+          <label for="project_list"><%= l(:label_project_plural) %></label>
+          <br>
+          <select id="project_lists" size="25" onChange="DisplayColumnsForProject(this.value)">
+            <% @projects.each do |prj| %>
+              <option value="<%= prj['id'] %>" >
+                <%= prj['name'] %>
+              </option>
+            <% end %>  
+          </select>
+        </td>
+        
+      
+        <td id='list_available_columns'>
+          <div id='div_available_columns'>
+            <label for="list_available_columns"><%= l(:available_columns) %></label>
+            <br>
+            <select id="available_columns" multiple="multiple" size="25">       
+            </select>
+          </div>
+        </td>  
+        
+        <td class="buttons">
+	      <input type="button" value="→" onclick="moveOptions(this.form.available_columns, this.form.selected_columns);"><br>
+	      <input type="button" value="←" onclick="moveOptions(this.form.selected_columns, this.form.available_columns);">
+    	</td>     
+        
+		 <td id='list_selected_columns' >
+          <div>
+            <label for="list_selected_columns"><%= l(:selected_columns) %></label>
+            <br>
+            <select id="selected_columns" multiple="multiple" size="25">
+            </select>
+          </div>
+        </td>
+               
+        <td class="buttons">
+     	  <input type="button" value="⇈" onclick="moveOptionTop(this.form.selected_columns);"><br>
+	      <input type="button" value="↑" onclick="moveOptionUp(this.form.selected_columns);"><br>
+	      <input type="button" value="↓" onclick="moveOptionDown(this.form.selected_columns);"><br>
+	      <input type="button" value="⇊" onclick="moveOptionBottom(this.form.selected_columns);">
+    	</td>
+        
+      </tr>
+    </tbody>
+  </table>
+
+  <select name="selectedColumns" style="display: none">
+	  <option id="selectedColumnsData" </option>	  	
+  </select>
+        
+</fieldset>
+
+
+<input id="saveAll" type="hidden" name="save" value="0" />
+
+</form>
+
+<br>
+  <button name="save" value=1 onclick="SaveAll()"><%= l(:button_save) %></button>
+
+<% content_for :header_tags do %>
+    <%= stylesheet_link_tag 'style', :plugin => 'subtask_list_columns' %>
+    <%= javascript_include_tag "columns_setting.js", :plugin => 'subtask_list_columns' %>
+<% end %>
+    
+<script type="text/javascript">
+
+	var allColumns = <%= @allColumns.to_json.html_safe %>;
+	var selectedColumns = <%= @selectedColumns.to_json.html_safe %>;                          
+	var previousProjectId = 0; 
+                         
+	function DisplayColumnsForProject(currentProjectId)
+	{
+		SaveFieldsForPreviousProject();
+	    		
+	    SetAvailableAndSelectedColumns(currentProjectId);
+	    	
+		previousProjectId = currentProjectId;
+	}
+	
+ 	function SetAvailableAndSelectedColumns(currentProjectId)
+  	{
+		var selectedColumnsSelect = document.getElementById('selected_columns'),
+			availableColumnsSelect = document.getElementById('available_columns'),
+			unsortedSelectedColumns = new Array();	
+		
+		while (selectedColumnsSelect.firstChild) 
+		{
+			selectedColumnsSelect.removeChild(selectedColumnsSelect.firstChild);
+		}	
+		while (availableColumnsSelect.firstChild) 
+		{
+			availableColumnsSelect.removeChild(availableColumnsSelect.firstChild);
+		}		
+		for(var i = 0; i < allColumns.length; i++)
+		{  	
+			var option = document.createElement('option');
+		    option.id = allColumns[i].ident;
+		    option.innerHTML = allColumns[i].name;
+		 
+		 	var alredyAdded = false;   
+			selectedColumns.forEach(function(item) {
+				if ((item['prj_id'] == currentProjectId) && (allColumns[i].ident == item['ident'])) 
+				{
+					//add to the list of selected columns without sorting	
+					unsortedSelectedColumns[item['order']] = option
+					alredyAdded = true;
+					return;  				
+				}  			
+			})			
+			if(alredyAdded == false)
+			{
+				availableColumnsSelect.appendChild(option)
+			}  		
+		}
+		
+		unsortedSelectedColumns.sort();		
+		unsortedSelectedColumns.forEach(function(item) {
+			selectedColumnsSelect.appendChild(item);	
+		}) 		  	  	
+  	}
+
+ 
+	function SaveFieldsForPreviousProject()
+	{
+		if(previousProjectId != 0)
+		{
+			var forDelete = []			
+			selectedColumns.forEach(function(item) 
+			{
+	  			if (item['prj_id'] == previousProjectId) 
+	  			{
+	  				forDelete.push(item);
+	  			}
+	  		})
+				
+			for(var i = 0; i < forDelete.length; i++)
+			{
+				selectedColumns.splice(selectedColumns.indexOf(forDelete[i]), 1);
+			}
+			
+			var selectedColumnsSelect = document.getElementById('selected_columns').getElementsByTagName('option');
+			
+			for(var i = 0; i < selectedColumnsSelect.length; i++)
+			{
+				selectedColumns.push({"prj_id" : previousProjectId, "ident" :  selectedColumnsSelect[i].id, "order" : i})
+			}
+			
+			var data = document.getElementById("selectedColumnsData");
+				data.value = JSON.stringify(selectedColumns); 						
+		}
+	}
+	
+	function SaveAll()
+	{
+		SaveFieldsForPreviousProject();
+		document.getElementById('saveAll').value = "1"
+		document.forms["subtask_list_columns"].submit();		
+	}
+</script>
