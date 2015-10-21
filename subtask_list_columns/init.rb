@@ -11,7 +11,7 @@ end
 
 Redmine::Plugin.register :subtask_list_columns do
   name 'Subtask list columns plugin'
-  author 'E.Redkozubov'
+  author 'SMS-IT: S.Parfenov, E.Redkozubov'
   description 'Customize columns in list of subtasks on issue page'
   version '0.0.1' 
  

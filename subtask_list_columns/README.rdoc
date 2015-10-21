@@ -23,7 +23,7 @@ A zip archive can be gotten from {GitHub}[https://github.com/SMS-IT/redmine_subt
 
 == Installation and Setup
 
-1. Follow the Redmine plugin installation steps at: http://www.redmine.org/wiki/redmine/Plugins Make sure the plugin is installed to +plugins/timelog_timer+
+1. Follow the Redmine plugin installation steps at: http://www.redmine.org/wiki/redmine/Plugins Make sure the plugin is installed to +plugins/subtask_list_columns+
 2. Restart your Redmine web servers (e.g. mongrel, thin, mod_rails)
 3. Login an administrator and open Administrator menu, click the Subtask columns list
 
