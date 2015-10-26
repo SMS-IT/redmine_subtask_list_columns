@@ -15,7 +15,7 @@ https://github.com/SMS-IT/redmine_subtask_list_columns/tree/master/screenshots
 
 == Compatibility
 
-Tested only on Redmine 3.0.3
+Tested only on Redmine 3.0.3, 3.1.1
 
 == Getting the plugin
 
