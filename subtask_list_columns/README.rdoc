@@ -1,0 +1,36 @@
+= Redmine Subtask list columns plugin
+
+Plugin allows to customize which columns are shown in list of subtasks on issue page.
+You can display any standard and custom fields. You can also change the order of columns.
+
+== Use
+By default for all projects only few fields are displayed: Subject, Status, Assignee, % Done.
+Customize fields for selected projects in plugin page - Administrator -> Subtask columns list.
+Move a field from the "Available columns" to the "Selected columns" and save changes.
+The field will be displayed in subtask list on the issue page for selected project.
+
+== Screenshots
+
+https://github.com/SMS-IT/redmine_subtask_list_columns/tree/master/screenshots
+
+== Compatibility
+
+Tested only on Redmine 3.0.3, 3.1.1
+
+== Getting the plugin
+
+A zip archive can be gotten from {GitHub}[https://github.com/SMS-IT/redmine_subtask_list_columns]
+
+== Installation and Setup
+
+1. Follow the Redmine plugin installation steps at: http://www.redmine.org/wiki/redmine/Plugins Make sure the plugin is installed to +plugins/subtask_list_columns+
+2. Restart your Redmine web servers (e.g. mongrel, thin, mod_rails)
+3. Login an administrator and open Administrator menu, click the Subtask columns list
+
+== Project help
+
+If you need help you can create an issue in the {GitHub Issues}[https://github.com/SMS-IT/redmine_subtask_list_columns/issues].
+
+=== Bug tracker
+
+If you would like to report a bug or request a new feature the bug tracker is located at: https://github.com/SMS-IT/redmine_subtask_list_columns/issues

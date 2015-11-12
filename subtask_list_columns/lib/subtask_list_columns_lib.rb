@@ -20,7 +20,7 @@ module SubtaskListColumnsLib
                 
         field_values = ''
         field_headers = ''
-        map = []
+
         s = '<form><table class="list issues">'
         
         if(fields_list.count == 0) 
@@ -34,7 +34,7 @@ module SubtaskListColumnsLib
           content_tag('th', l(:field_done_ratio)))
 
           issue_list(issue.descendants.visible.sort_by(&:lft)) do |child, level|
-            custom_fields = child.available_custom_fields
+
             css = "issue issue-#{child.id} hascontextmenu"
             css << " idnt idnt-#{level}" if level > 0
             field_content = 
@@ -70,7 +70,7 @@ module SubtaskListColumnsLib
           
           # set data
           issue_list(issue.descendants.visible.sort_by(&:lft)) do |child, level|
-              custom_fields = child.available_custom_fields
+
               css = "issue issue-#{child.id} hascontextmenu"
               css << " idnt idnt-#{level}" if level > 0
               
@@ -163,7 +163,7 @@ module SubtaskListColumnsLib
       private 
       def get_fields_for_project(project_id, available_custom_fields)
         all_fields = SubtaskListColumns.all.select {|c| c.prj_id == project_id}.sort_by{|o| o.order}
-        available_fields = remove_unavailable_custom_fields(all_fields, available_custom_fields)
+        remove_unavailable_custom_fields(all_fields, available_custom_fields)
       end
       
       private 
