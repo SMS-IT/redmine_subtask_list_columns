@@ -1,0 +1,7 @@
+# Japanese strings go here for Rails i18n
+ja:
+  subtask_list_columns: "サブタスクリストカラム"
+  
+  available_columns: "利用できるカラム"
+  
+  selected_columns: "選択したカラム"
