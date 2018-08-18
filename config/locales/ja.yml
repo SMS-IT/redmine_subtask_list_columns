@@ -1,7 +1,7 @@
 # Japanese strings go here for Rails i18n
 ja:
-  subtask_list_columns: "$B%5%V%?%9%/%j%9%H%+%i%`(B"
+  subtask_list_columns: "サブタスクリストカラム"
   
-  available_columns: "$BMxMQ$G$-$k%+%i%`(B"
+  available_columns: "利用できるカラム"
   
-  selected_columns: "$BA*Br$7$?%+%i%`(B"
+  selected_columns: "選択したカラム"
