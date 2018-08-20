@@ -9,6 +9,10 @@ module SubtaskListColumnsLib
             unloadable
 
             alias_method_chain :render_descendants_tree, :listed
+            alias_method :get_fields_for_project, :get_fields_for_project
+            alias_method :remove_unavailable_custom_fields, :remove_unavailable_custom_fields
+            alias_method :get_first_column_in_table, :get_first_column_in_table
+            alias_method :get_td, :get_td
       end
     end
 
